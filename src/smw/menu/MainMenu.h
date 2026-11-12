@@ -21,6 +21,7 @@ private:
     MI_Button* miMainStartButton;
     MI_Button* miQuickGameButton;
     MI_Button* miMultiplayerButton;
+    MI_Button* miMapControllerButton;
 
     MI_PlayerSelect* miPlayerSelect;
 

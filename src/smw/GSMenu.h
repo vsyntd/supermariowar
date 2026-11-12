@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <vector>
+#include "menu/MapControllerMenu.h"
 
 class UI_Menu;
 
@@ -122,6 +123,7 @@ class MenuState : public GameState
 		std::unique_ptr<UI_GraphicsOptionsMenu> mGraphicsOptionsMenu;
 		std::unique_ptr<UI_EyeCandyOptionsMenu> mEyeCandyOptionsMenu;
 		std::unique_ptr<UI_SoundOptionsMenu> mSoundOptionsMenu;
+		std::unique_ptr<UI_MapControllerMenu> mMapControllerMenu;
 
 		// Controls menu
 		std::unique_ptr<UI_PlayerControlsSelectMenu> mPlayerControlsSelectMenu;

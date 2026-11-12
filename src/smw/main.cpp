@@ -53,7 +53,7 @@
 #include "gamemodes/Survival.h"
 #include "gamemodes/Tag.h"
 #include "gamemodes/TimeLimit.h"
-
+#include "hid_service.h"
 #include "FPSLimiter.h"
 #include "GSSplashScreen.h"
 #include "joystick.h"
@@ -63,9 +63,14 @@
 #include <cstdlib> // srand()
 #include <iostream>
 #include <SDL3/SDL.h>
+#include <IOKit/hid/IOHIDManager.h>
+#include <IOKit/hid/IOHIDKeys.h>
+#include <IOKit/IOKitLib.h>
+#include <iostream>
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 #endif
+
 
 #ifdef _MSC_VER
 #if _MSC_VER >= 1400
@@ -80,6 +85,8 @@
 #include "ui/MI_InputControlContainer.h"
 #include "SDL_Helper.h"
 #include <filesystem>
+#include <fstream>
+#include <string>
 
 
 //now it's really time for an "engine" (aka resource manager)
@@ -157,6 +164,11 @@ void gameloop_frame()
     while (game_values.appstate != AppState::Quit)
 #endif
     {
+        CFRunLoopRunInMode(
+            kCFRunLoopDefaultMode,
+            0,
+            true
+        );
         FPSLimiter::instance().frameStart();
 
         GameStateManager::instance().currentState->update();
@@ -329,6 +341,7 @@ int main(int argc, char *argv[])
 
 void main_game()
 {
+    findHIDDevice("Lossless");
     printf("-------------------------------------------------------------------------------\n");
     printf(" %s %s %s\n", TITLESTRING, GIT_REVISION, GIT_DATE);
     printf("-------------------------------------------------------------------------------\n");
@@ -364,6 +377,7 @@ void main_game()
     sprintf(title, "%s %s %s", TITLESTRING, GIT_REVISION, GIT_DATE);
     gfx_settitle(title);
     gfx_setIcon();
+  
 
     SDL_HideCursor();
 
@@ -417,6 +431,20 @@ void main_game()
 
     gameloop(); // all the game logic happens here
 
+#ifdef __APPLE__
+    if (hidManager)
+    {
+        IOHIDManagerUnscheduleFromRunLoop(
+            hidManager,
+            CFRunLoopGetCurrent(),
+            kCFRunLoopDefaultMode
+        );
+
+        IOHIDManagerClose(hidManager, kIOHIDOptionsTypeNone);
+        CFRelease(hidManager);
+        hidManager = nullptr;
+    }
+#endif
 
     //**********************************************************
 

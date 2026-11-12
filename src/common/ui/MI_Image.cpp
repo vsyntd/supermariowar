@@ -12,7 +12,7 @@ MI_Image::MI_Image(
         short x, short y,
         short srcx, short srcy,
         short w, short h,
-        short numxframes, short numyframes, short speed)
+        short numxframes, short numyframes, short speed, int id )
     : UI_Control(x, y)
     , spr(nspr)
     , iNumXFrames(numxframes)
@@ -24,7 +24,9 @@ MI_Image::MI_Image(
     , iSpeed(speed)
     , iXFrame(srcx)
     , iYFrame(srcy)
-{}
+{
+    this->id = id;
+}
 
 void MI_Image::Update()
 {
@@ -102,6 +104,22 @@ void MI_Image::Draw()
         };
         spr->drawStretch(srcRect, blitdest, dstRect);
     } else {
-        spr->draw(m_pos.x + iXOffset, m_pos.y + iYOffset, srcRect);
+        if(drawScaledToCenter){
+
+            // e.g. if scale is 70% -> offset x and y 15% 
+            // w and h are 70% wich leaves 15% at the other side 
+            float inverseScaleHalfWidth = (1 - scaleVal)/2.f * iw;
+            float inverseScaleHalfHeight = (1 - scaleVal)/2.f * ih;
+
+            SDL_Rect dstRect {
+                m_pos.x + inverseScaleHalfWidth  ,
+                m_pos.y + inverseScaleHalfHeight  ,
+                iw * scaleVal,
+                ih * scaleVal,
+            };
+
+            spr->drawStretch(srcRect, blitdest, dstRect);
+        }else
+            spr->draw(m_pos.x + iXOffset, m_pos.y + iYOffset, srcRect);
     }
 }

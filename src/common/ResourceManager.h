@@ -83,9 +83,16 @@ public:
 	gfxSprite		menu_mode_large;
 	gfxSprite		spr_dialog;
 	gfxSprite		spr_dialogbutton;
+	gfxSprite		spr_cursor;
+	gfxSprite		spr_gcc_port;
+	gfxSprite		spr_gcc_port_highlight1;
+	gfxSprite		spr_gcc_port_highlight2;
+	gfxSprite		spr_gcc_port_highlight3;
+	gfxSprite		spr_gcc_port_highlight4;
 	gfxSprite		spr_tournament_background;
 	gfxSprite		spr_tournament_powerup_splash;
 	gfxSprite		spr_player_select_background;
+	gfxSprite		spr_game_cube_controller;
 	gfxSprite		spr_player_select_ready;
 	//gfxSprite		spr_ipfield;
 	gfxSprite		spr_selectfield;

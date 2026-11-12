@@ -200,7 +200,12 @@ add_subdirectory(src/common_netplay)
 add_subdirectory(src/smw)
 add_subdirectory(src/leveleditor)
 add_subdirectory(src/worldeditor)
-
+if(APPLE)
+    target_link_libraries(smw
+        "-framework CoreFoundation"
+        "-framework IOKit"
+    )
+endif()
 if(NOT NO_NETWORK)
 	add_subdirectory(src/server)
 endif()

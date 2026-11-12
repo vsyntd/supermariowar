@@ -9,7 +9,7 @@
 
 
 enum PlayerPalette {
-    normal,
+    palette_normal,
     invincibility_1,
     invincibility_2,
     invincibility_3,

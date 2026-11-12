@@ -25,6 +25,9 @@ target_sources(smw PRIVATE
     TourStopMenu.h
     WorldMenu.cpp
     WorldMenu.h
+    MapControllerMenu.cpp
+    MapControllerMenu.h
+    ControllerTypes.h
 
     options/EyeCandyOptionsMenu.cpp
     options/EyeCandyOptionsMenu.h

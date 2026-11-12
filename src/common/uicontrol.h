@@ -4,6 +4,7 @@
 #include "math/Vec2.h"
 
 #include <array>
+#include <iostream>
 
 class CPlayerInput;
 class UI_Menu;

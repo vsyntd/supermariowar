@@ -137,6 +137,7 @@ bool MenuState::init()
     mGraphicsOptionsMenu = std::make_unique<UI_GraphicsOptionsMenu>();
     mEyeCandyOptionsMenu = std::make_unique<UI_EyeCandyOptionsMenu>();
     mSoundOptionsMenu = std::make_unique<UI_SoundOptionsMenu>();
+    mMapControllerMenu = std::make_unique<UI_MapControllerMenu>();
 
     // Controls menu
     mPlayerControlsSelectMenu = std::make_unique<UI_PlayerControlsSelectMenu>();
@@ -573,6 +574,7 @@ void MenuState::update()
             iDisplayError = DISPLAY_ERROR_NONE;
             iDisplayErrorTimer = 0;
             net_endSession();
+            //mCurrentMenu->ResetMenu();
 
             mCurrentMenu = mMainMenu.get();
         } else if (MENU_CODE_BACK_TO_MATCH_SELECTION_MENU == code) {
@@ -608,7 +610,13 @@ void MenuState::update()
         } else if (MENU_CODE_TO_OPTIONS_MENU == code) {
             mCurrentMenu = mOptionsMenu.get();
             mCurrentMenu->ResetMenu();
-        } else if (MENU_CODE_BACK_TO_OPTIONS_MENU == code) {
+        } else if(MENU_CODE_MAP_CONTROLLER == code){
+            mCurrentMenu = mMapControllerMenu.get();
+            mMapControllerMenu->InitMenu();
+        } else if(MENU_CODE_MAP_CONTROLLER_SKIP_DESCRIPTION == code){
+            mMapControllerMenu->isInExplainMode = false;
+        } 
+         else if (MENU_CODE_BACK_TO_OPTIONS_MENU == code) {
             mCurrentMenu = mOptionsMenu.get();
         } else if (MENU_CODE_TO_NET_SERVERS_MENU == code) {
             mCurrentMenu = mNetServersMenu.get();

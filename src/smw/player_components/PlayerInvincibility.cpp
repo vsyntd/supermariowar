@@ -9,7 +9,8 @@
 extern CGameValues game_values;
 extern CResourceManager* rm;
 
-static const std::array<PlayerPalette, 4> INVINCIBILITY_ANIMATION_STATES = {normal, invincibility_1, invincibility_2, invincibility_3};
+// changed normal to palette_normal, because its conflicting with MacOS IOKITS enums
+static const std::array<PlayerPalette, 4> INVINCIBILITY_ANIMATION_STATES = {palette_normal, invincibility_1, invincibility_2, invincibility_3};
 static const short INVINCIBILITY_TIME = 580;
 static const short INVINCIBILITY_HURRYUP_TIME = 100;
 static const short INVINCIBILITY_ANIMATION_DELAY = 4;

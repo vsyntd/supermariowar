@@ -27,6 +27,8 @@ add_executable(smw WIN32
 	player.h
 	world.cpp
 	world.h
+	hid_service.cpp
+	hid_service.h
 
 	../common/movingplatform.cpp
 	../common/movingplatform.h

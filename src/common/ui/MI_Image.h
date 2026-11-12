@@ -6,12 +6,14 @@ class gfxSprite;
 
 
 class MI_Image : public UI_Control {
-public:
+public: 
+    // to identify each Image from an spritesheet
+    int id;
     MI_Image(gfxSprite* nspr,
         short x, short y,
         short srcx, short srcy,
         short w, short h,
-        short numxframes, short numyframes, short speed);
+        short numxframes, short numyframes, short speed, int id = 0);
 
     void Update() override;
     void Draw() override;
@@ -48,7 +50,13 @@ public:
         fBlink = blink;
         iBlinkInterval = interval;
     }
-
+    void SetScale(bool scale, float scaleVal){
+        drawScaledToCenter = scale; 
+        this->scaleVal = scaleVal;
+    }
+    float GetScale(){
+        return scaleVal;
+    }
     bool IsSwirling() const {
         return fSwirl;
     }
@@ -73,11 +81,13 @@ private:
     short iTimer = 0;
     short iXFrame = 0;
     short iYFrame = 0;
+    float scaleVal = 1;
 
     bool fPulse = false;
     short iPulseValue = 0;
     short iPulseDelay = 0;
     bool fPulseOut = true;
+    bool drawScaledToCenter = false;
 
     bool fSwirl = false;
     float dSwirlRadius = 0.f;

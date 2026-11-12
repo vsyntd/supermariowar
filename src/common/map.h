@@ -74,7 +74,7 @@ class CPlayer;
 class MovingPlatform;
 class IO_MovingObject;
 
-struct Point {
+struct MapPoint {
 	short x, y;
 };
 
@@ -312,9 +312,9 @@ class CMap
 
 		std::array<bool, NUM_AUTO_FILTERS> fAutoFilter;
 
-		Point       racegoallocations[MAXRACEGOALS];
+		MapPoint       racegoallocations[MAXRACEGOALS];
 
-		Point       flagbaselocations[4];
+		MapPoint       flagbaselocations[4];
 
 		short		iTileAnimationTimer = 0;
 		short		iTileAnimationFrame = 0;

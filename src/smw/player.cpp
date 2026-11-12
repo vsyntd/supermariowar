@@ -879,7 +879,7 @@ PlayerPalette CPlayer::getPlayerPalette() const
     if (isShielded()) {
         return PlayerPalette::shielded;
     }
-    return PlayerPalette::normal;
+    return PlayerPalette::palette_normal;
 }
 
 void CPlayer::tryFallingThroughPlatform(short movement_direction)

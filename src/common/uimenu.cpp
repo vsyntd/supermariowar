@@ -202,6 +202,7 @@ MenuCodeEnum UI_Menu::MouseClick(short iMouseX, short iMouseY)
     MenuCodeEnum code = MENU_CODE_NONE;
     for (const std::unique_ptr<UI_Control>& control : controls) {
         if (control->IsVisible()) {
+
             code = control->MouseClick(iMouseX, iMouseY);
             if (code != MENU_CODE_NONE) {
                 pFound = control.get();

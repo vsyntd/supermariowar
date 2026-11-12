@@ -19,10 +19,10 @@ UI_MainMenu::UI_MainMenu()
     miMainStartButton = new MI_Button(&rm->spr_selectfield, 120, 210, "Start", 310);
     miMainStartButton->SetCode(MENU_CODE_TO_MATCH_SELECTION_MENU);
 
-    miQuickGameButton = new MI_Button(&rm->spr_selectfield, 440, 210, "Go!", 80);
+    miQuickGameButton = new MI_Button(&rm->spr_selectfield, 440, 210, "Go!", 80 + 20);
     miQuickGameButton->SetCode(MENU_CODE_QUICK_GAME_START);
 
-    miPlayerSelect = new MI_PlayerSelect(&rm->menu_player_select, 120, 250, "Players", 400, 140);
+    miPlayerSelect = new MI_PlayerSelect(&rm->menu_player_select, 120 + 10, 250, "Players", 400, 140);
 
 // disable Multiplayer button for web builds
 #ifdef __EMSCRIPTEN__
@@ -30,19 +30,21 @@ UI_MainMenu::UI_MainMenu()
     miOptionsButton = new MI_Button(&rm->spr_selectfield, 120, 362, "Options", 400);
     miControlsButton = new MI_Button(&rm->spr_selectfield, 120, 402, "Controls", 400);
 #else
-    miMultiplayerButton = new MI_Button(&rm->spr_selectfield, 120, 322, "Multiplayer", 400);
+    miMultiplayerButton = new MI_Button(&rm->spr_selectfield, 120, 322, "Multiplayer", 400 + 20);
     miMultiplayerButton->SetCode(MENU_CODE_TO_NET_SERVERS_MENU);
 
-    miOptionsButton = new MI_Button(&rm->spr_selectfield, 120, 362, "Options", 200);
-    miControlsButton = new MI_Button(&rm->spr_selectfield, 320, 362, "Controls", 200);
+    miOptionsButton = new MI_Button(&rm->spr_selectfield, 120, 362, "Options", 120);
+    miMapControllerButton = new MI_Button(&rm->spr_selectfield, 120 + 120 * 2, 362, "Map Controller", 180);
+    miControlsButton = new MI_Button(&rm->spr_selectfield, 120 + 120 , 362, "Controls", 120);
 #endif
     miOptionsButton->SetCode(MENU_CODE_TO_OPTIONS_MENU);
     miControlsButton->SetCode(MENU_CODE_TO_CONTROLS_MENU);
+    miMapControllerButton->SetCode(MENU_CODE_MAP_CONTROLLER);
 
 #ifdef __EMSCRIPTEN__
     miExitButton = NULL;
 #else
-    miExitButton = new MI_Button(&rm->spr_selectfield, 120, 402, "Exit", 640 * 0.625f);
+    miExitButton = new MI_Button(&rm->spr_selectfield, 120, 402, "Exit", 640 * 0.625f + 20);
     miExitButton->SetCode(MENU_CODE_EXIT_APPLICATION);
 #endif
 
@@ -51,9 +53,11 @@ UI_MainMenu::UI_MainMenu()
     AddControl(miQuickGameButton, miExitButton, miPlayerSelect, miMainStartButton, NULL);
     AddControl(miPlayerSelect, miMainStartButton, miMultiplayerButton, NULL, NULL);
     AddControl(miMultiplayerButton, miPlayerSelect, miOptionsButton, NULL, NULL);
-    AddControl(miOptionsButton, miMultiplayerButton, miExitButton, miControlsButton, miControlsButton);
-    AddControl(miControlsButton, miMultiplayerButton, miExitButton, miOptionsButton, miOptionsButton);
+    AddControl(miOptionsButton, miMultiplayerButton, miExitButton, miMapControllerButton, miControlsButton);
+    AddControl(miControlsButton, miMultiplayerButton, miExitButton, miOptionsButton, miMapControllerButton);
     AddControl(miExitButton, miOptionsButton, miMainStartButton, NULL, NULL);
+    AddControl(miMapControllerButton, miMultiplayerButton, miExitButton, miControlsButton, miOptionsButton);
+
 #else
     AddControl(miMainStartButton, miControlsButton, miPlayerSelect, NULL, miQuickGameButton);
     AddControl(miQuickGameButton, miControlsButton, miPlayerSelect, miMainStartButton, NULL);

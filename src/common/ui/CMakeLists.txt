@@ -20,4 +20,6 @@ target_sources(CommonFiles PRIVATE
     MI_Text.h
     MI_TextField.cpp
     MI_TextField.h
+    MI_Cursor.cpp
+    MI_Cursor.h
 )

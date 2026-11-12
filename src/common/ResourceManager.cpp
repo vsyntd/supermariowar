@@ -324,7 +324,14 @@ void CResourceManager::loadMenuGraphics()
     menu_mode_small = builder("gfx/packs/menu/menu_mode_small.png").create();
     menu_mode_large = builder("gfx/packs/menu/menu_mode_large.png").create();
 
+    spr_game_cube_controller = builder("gfx/packs/menu/gcc_spritesheet.png").create();
     spr_dialog = builder("gfx/packs/menu/dialog.png").create();
+    spr_cursor = builder("gfx/packs/menu/cursor.png").create();
+    spr_gcc_port = builder("gfx/packs/menu/gcc_port.png").create();
+    spr_gcc_port_highlight1 = builder("gfx/packs/menu/highlight_p1.png").create();
+    spr_gcc_port_highlight2 = builder("gfx/packs/menu/highlight_p2.png").create();
+    spr_gcc_port_highlight3 = builder("gfx/packs/menu/highlight_p3.png").create();
+    spr_gcc_port_highlight4= builder("gfx/packs/menu/highlight_p4.png").create();
     spr_dialogbutton = builder("gfx/packs/menu/dialog_button.png").create();
     spr_tournament_background = builder("gfx/packs/menu/tournament_background.png").create();
     spr_tournament_powerup_splash = builder("gfx/packs/menu/tournament_powerup_splash.png").create();
